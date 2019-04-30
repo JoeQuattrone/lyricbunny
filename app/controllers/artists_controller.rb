@@ -1,5 +1,5 @@
 class ArtistsController < ApplicationController
-  before_action :set_artist, only: [:show, :update, :destroy]
+  before_action :set_artist, only: [:show, :update]
 
   # GET /artists
   def index
@@ -31,11 +31,6 @@ class ArtistsController < ApplicationController
     else
       render json: @artist.errors, status: :unprocessable_entity
     end
-  end
-
-  # DELETE /artists/1
-  def destroy
-    @artist.destroy
   end
 
   private

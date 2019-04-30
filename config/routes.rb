@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :artists
-  resources :songs
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :artists, except: [:destroy]
+  resources :songs, except: [:destroy]
+  patch '/artist:id/songs/:id/update_likes', to: 'songs#update_likes'
 end

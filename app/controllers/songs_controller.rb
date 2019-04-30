@@ -1,5 +1,5 @@
 class SongsController < ApplicationController
-  before_action :set_song, only: [:show, :update, :destroy]
+  before_action :set_song, only: [:show, :update, :update_likes]
 
   # GET /songs
   def index
@@ -33,10 +33,13 @@ class SongsController < ApplicationController
     end
   end
 
-  # DELETE /songs/1
-  def destroy
-    @song.destroy
+  def update_likes
+    if @song
+      @song.update(likes: @song.likes + 1)
+    end
   end
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
