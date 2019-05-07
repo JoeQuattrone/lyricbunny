@@ -1,7 +1,7 @@
 class Song < ApplicationRecord
   validates :track_id, uniqueness: true
 
-  def top_three
-    Song.all.sort {|song| song.likes}.reverse!.take(3)
+  def self.trending_songs
+    self.all.sort {|song| song.likes}.take(3)
   end
 end

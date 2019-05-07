@@ -17,6 +17,11 @@ class SongsController < ApplicationController
     end
   end
 
+  def trending_songs
+    @songs = Song.trending_songs
+    render json: @songs
+  end
+
   # GET /songs/1
   def show
     render json: @song
