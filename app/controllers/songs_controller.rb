@@ -1,11 +1,20 @@
+require 'pry'
 class SongsController < ApplicationController
-  before_action :set_song, only: [:show, :update, :update_likes]
 
   # GET /songs
   def index
     @songs = Song.all
 
     render json: @songs
+  end
+
+  def update_likes
+    @song = Song.find_by(track_id: params[:song][:track][:track_id])
+    if @song
+      @song.update(likes: @song.likes + 1)
+    else
+      @song = Song.create(track_id: params[:song][:track][:track_id], track_name: params[:song][:track][:track_name], likes: 1, genre: params[:song][:track]["primary_genres"]["music_genre_list"].first["music_genre"]["music_genre_name"], artist_name: params[:song][:track][:artist_name] )
+    end
   end
 
   # GET /songs/1
@@ -30,12 +39,6 @@ class SongsController < ApplicationController
       render json: @song
     else
       render json: @song.errors, status: :unprocessable_entity
-    end
-  end
-
-  def update_likes
-    if @song
-      @song.update(likes: @song.likes + 1)
     end
   end
 

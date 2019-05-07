@@ -24,14 +24,13 @@ ActiveRecord::Schema.define(version: 2019_04_30_134413) do
   end
 
   create_table "songs", force: :cascade do |t|
-    t.bigint "artist_id"
-    t.string "title"
-    t.string "image_url"
-    t.text "lyrics"
+    t.string "artist_name"
+    t.integer "track_id"
+    t.string "track_name"
+    t.string "genre"
     t.integer "likes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["artist_id"], name: "index_songs_on_artist_id"
   end
 
 end
