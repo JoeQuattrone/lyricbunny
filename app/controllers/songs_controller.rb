@@ -17,6 +17,11 @@ class SongsController < ApplicationController
     end
   end
 
+  def update_likes_from_home
+    @song = Song.find_by(track_id: params[:song][:track_id])
+    @song.update(likes: @song.likes + 1) if @song
+  end
+
   def trending_songs
     @songs = Song.trending_songs
     render json: @songs
