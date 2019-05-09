@@ -9,7 +9,6 @@ class SongsController < ApplicationController
   end
 
   def update_likes
-    binding.pry
     @song = Song.find_by(track_id: params[:song][:track][:track_id])
     if @song
       @song.update(likes: @song.likes + 1)
@@ -18,7 +17,6 @@ class SongsController < ApplicationController
 
       @song.update(genre: params[:song][:track]["primary_genres"]["music_genre_list"].first["music_genre"]["music_genre_name"]) if !params[:song][:track]["primary_genres"]["music_genre_list"].empty?
     end
-
   end
   # params[:song][:track]["primary_genres"]["music_genre_list"].first["music_genre"]["music_genre_name"]
 
