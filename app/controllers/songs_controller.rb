@@ -1,7 +1,5 @@
 require 'pry'
-require 'rest-client'
 require 'faraday'
-require 'net/http'
 require 'faraday_middleware'
 
 class SongsController < ApplicationController
@@ -47,16 +45,6 @@ class SongsController < ApplicationController
       binding.pry
 
 
-
-    # @response = Faraday.get 'https://cors-anywhere.herokuapp.com/http://api.musixmatch.com/ws/1.1/chart.tracks.get?chart_name=top&page=1&page_size=6&country=it&f_has_lyrics=1&apikey=523ebe747e1a258aaddd09f97f90cb70'
-    # response = RestClient.get 'https://cors-anywhere.herokuapp.com/http://api.musixmatch.com/ws/1.1/chart.tracks.get?chart_name=top&page=1&page_size=6&country=it&f_has_lyrics=1&apikey=523ebe747e1a258aaddd09f97f90cb70'
-
-    # request = Typhoeus::Request.new("https://cors-anywhere.herokuapp.com/http://api.musixmatch.com/ws/1.1/chart.tracks.get?chart_name=top&page=1&page_size=6&country=it&f_has_lyrics=1&apikey=523ebe747e1a258aaddd09f97f90cb70",
-    #   method: :get,
-    # )
-    #
-    # @res = request.run
-    #
 
   end
   # search db for songs or create new ones. render json @songs
