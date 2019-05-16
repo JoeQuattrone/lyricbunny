@@ -1,4 +1,9 @@
 require 'pry'
+require 'rest-client'
+require 'faraday'
+require 'net/http'
+require 'faraday_middleware'
+
 class SongsController < ApplicationController
 
   # GET /songs
@@ -29,6 +34,32 @@ class SongsController < ApplicationController
     @songs = Song.trending_songs
     render json: @songs
   end
+
+  def popular_songs
+    url = 'http://api.musixmatch.com/ws/1.1/chart.tracks.get?chart_name=top&page=1&page_size=6&country=it&f_has_lyrics=1&apikey=523ebe747e1a258aaddd09f97f90cb70'
+
+    conn = Faraday.new(url: url) do |faraday|
+      faraday.adapter Faraday.default_adapter
+      faraday.response :json
+    end
+    response = conn.get
+    response.body
+      binding.pry
+
+
+
+    # @response = Faraday.get 'https://cors-anywhere.herokuapp.com/http://api.musixmatch.com/ws/1.1/chart.tracks.get?chart_name=top&page=1&page_size=6&country=it&f_has_lyrics=1&apikey=523ebe747e1a258aaddd09f97f90cb70'
+    # response = RestClient.get 'https://cors-anywhere.herokuapp.com/http://api.musixmatch.com/ws/1.1/chart.tracks.get?chart_name=top&page=1&page_size=6&country=it&f_has_lyrics=1&apikey=523ebe747e1a258aaddd09f97f90cb70'
+
+    # request = Typhoeus::Request.new("https://cors-anywhere.herokuapp.com/http://api.musixmatch.com/ws/1.1/chart.tracks.get?chart_name=top&page=1&page_size=6&country=it&f_has_lyrics=1&apikey=523ebe747e1a258aaddd09f97f90cb70",
+    #   method: :get,
+    # )
+    #
+    # @res = request.run
+    #
+
+  end
+  # search db for songs or create new ones. render json @songs
 
   # GET /songs/1
   def show
