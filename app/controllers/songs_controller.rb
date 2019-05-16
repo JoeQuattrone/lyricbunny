@@ -42,10 +42,10 @@ class SongsController < ApplicationController
     end
     response = conn.get
     response.body
-      binding.pry
+    track_list = response.body["message"]["body"]["track_list"]
 
-
-
+    track_list.each {|song| Song.find_or_create_by_track_id(song)}
+    render json: response
   end
   # search db for songs or create new ones. render json @songs
 
