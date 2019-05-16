@@ -12,6 +12,7 @@ class SongsController < ApplicationController
 
   def update_likes
     @song = Song.find_by(track_id: params[:song][:track][:track_id])
+
     if @song
       @song.update(likes: @song.likes + 1)
     else
